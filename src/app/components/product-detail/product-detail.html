@@ -1,0 +1,78 @@
+<div class="page-wrapper">
+
+  <div *ngIf="loading" class="text-center py-5 mt-5">
+    <div class="spinner-border text-primary" style="width:3rem;height:3rem;" role="status"></div>
+    <p class="mt-3 text-muted">Loading product details...</p>
+  </div>
+
+  <div *ngIf="!loading && !product" class="text-center py-5 mt-5">
+    <i class="fas fa-exclamation-circle fa-5x text-muted mb-3"></i>
+    <h3 class="text-muted">Product not found.</h3>
+    <a routerLink="/products" class="btn btn-primary mt-3">Back to Products</a>
+  </div>
+
+  <div *ngIf="!loading && product" class="container py-5">
+
+    <nav class="breadcrumb-nav mb-4">
+      <a routerLink="/products" class="breadcrumb-link">
+        <i class="fas fa-arrow-left me-2"></i>All Products
+      </a>
+      <span class="breadcrumb-sep">/</span>
+      <span *ngIf="categoryName" class="breadcrumb-cat">{{ categoryName }}</span>
+      <span *ngIf="categoryName" class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">{{ product.item_Name }}</span>
+    </nav>
+
+    <div class="row g-5">
+
+      <div class="col-lg-6">
+        <div class="main-image-wrap">
+          <img *ngIf="selectedImage" [src]="selectedImage" alt="Product Image" class="main-image">
+          <div *ngIf="!selectedImage" class="main-image-placeholder">
+            <i class="fas fa-shopping-bag fa-5x text-secondary"></i>
+          </div>
+        </div>
+        <div *ngIf="product.imageUrls?.length > 1" class="thumbnail-row">
+          <img *ngFor="let url of product.imageUrls"
+               [src]="url"
+               [class.active]="url === selectedImage"
+               (click)="selectImage(url)"
+               class="thumbnail">
+        </div>
+      </div>
+
+      <div class="col-lg-6 d-flex flex-column justify-content-center">
+        <span *ngIf="categoryName" class="category-badge mb-3">{{ categoryName }}</span>
+        <h1 class="product-title">{{ product.item_Name }}</h1>
+        <p class="product-description">{{ product.description }}</p>
+
+        <div class="price-box mt-3 mb-4">
+          <span class="price-label">Price</span>
+          <span class="price-value">{{ product.price | currency }}</span>
+        </div>
+
+        <div class="stats-row mb-4">
+          <div class="stat-item">
+            <i class="fas fa-boxes"></i>
+            <span>In Stock</span>
+            <strong>{{ product.quantity }}</strong>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Sold</span>
+            <strong>{{ product.solditems }}</strong>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-add-cart">
+            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+          </button>
+          <a routerLink="/products" class="btn-back">
+            <i class="fas fa-arrow-left me-2"></i>Back
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

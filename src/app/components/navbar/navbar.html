@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary d-flex align-items-center gap-2" routerLink="/">
+      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081840.png" alt="Logo" width="35" height="35" class="d-inline-block align-text-top" style="filter: hue-rotate(220deg);">
+      E-Commerce
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/categories" routerLinkActive="active">Categories</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        <ng-container *ngIf="!authService.isLoggedIn()">
+          <a routerLink="/login" class="btn btn-outline-primary px-4">Login</a>
+          <a routerLink="/register" class="btn btn-primary px-4 shadow-sm">Register</a>
+        </ng-container>
+
+        <ng-container *ngIf="authService.isLoggedIn()">
+          <a routerLink="/profile" class="btn btn-light d-flex align-items-center gap-2">
+            <i class="fas fa-user-circle fa-lg"></i> My Profile
+          </a>
+          <button class="btn btn-danger px-3 shadow-sm" (click)="onLogout($event)">
+            <i class="fas fa-sign-out-alt me-2"></i>Logout
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</nav>

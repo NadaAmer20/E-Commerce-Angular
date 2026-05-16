@@ -1,0 +1,27 @@
+.hover-primary {
+  transition: color 0.3s ease;
+}
+
+.hover-primary:hover {
+  color: #667eea !important;
+}
+
+.btn-floating {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.btn-floating:hover {
+  transform: translateY(-3px);
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+footer {
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.02) !important;
+}
