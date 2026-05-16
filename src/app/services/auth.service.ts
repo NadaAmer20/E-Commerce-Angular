@@ -48,7 +48,6 @@ export class AuthService {
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
-        // The ID is usually in sub or nameidentifier claim
         const idClaim = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || payload.sub || payload.Id || payload.id;
         return idClaim ? Number(idClaim) : null;
       } catch (e) {
